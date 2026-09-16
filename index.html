@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wonder Label Stickers — Print Manager</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Segoe UI",sans-serif;background:#f5f7fa;color:#17212b}.hidden{display:none!important}.app{display:flex;min-height:100vh}.side{width:220px;background:#fff;border-right:1px solid #e1e6ec;padding:23px 14px}.logo{font-size:21px;font-weight:800;margin:0 10px 14px}.logo span{color:#2468d5}.account{margin:0 10px 24px;padding:10px 0;border-top:1px solid #edf0f3;border-bottom:1px solid #edf0f3;font-size:11px;color:#718096;word-break:break-word}.account b{display:block;font-size:12px;color:#354052;margin-bottom:3px}.nav button{width:100%;border:0;background:none;text-align:left;padding:12px;border-radius:9px;margin:3px 0;color:#536171;cursor:pointer}.nav button.active,.nav button:hover{background:#eaf2ff;color:#2468d5;font-weight:700}.logout{margin-top:18px}.main{flex:1;padding:32px;width:calc(100% - 220px);max-width:none;min-width:0}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}.top h1{margin:0;font-size:27px}.btn{border:0;background:#2468d5;color:#fff;padding:10px 16px;border-radius:8px;font-weight:700;cursor:pointer}.btn.gray{background:#fff;color:#354052;border:1px solid #d8dfe7}.btn.red{background:#fff;color:#bd3c31;border:1px solid #ecc8c4}.btn:disabled{opacity:.55;cursor:not-allowed}.card{background:#fff;border:1px solid #e1e6ec;border-radius:12px;padding:20px;margin-top:17px}.form{max-width:760px}.field{margin-bottom:15px}.field label{display:block;font-size:12px;font-weight:700;color:#5b6877;margin-bottom:7px}.field input,.field select{width:100%;padding:11px;border:1px solid #d5dce5;border-radius:8px;font-size:15px}.rtl{direction:rtl;text-align:right}.row{display:grid;grid-template-columns:1fr 1fr;gap:15px}.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center}.search{width:250px;padding:10px;border:1px solid #d5dce5;border-radius:8px}.count{font-size:13px;color:#718096;margin-top:11px}.tablewrap{overflow:auto;margin-top:14px}table{width:100%;border-collapse:collapse;min-width:790px}th,td{padding:12px 8px;border-bottom:1px solid #edf0f3;text-align:left;font-size:14px;white-space:nowrap}th{font-size:11px;color:#718096;text-transform:uppercase;background:#fafbfc}.check{width:18px;height:18px}.status{font-size:12px;padding:5px 9px;border-radius:20px;background:#fff3dc;color:#956500}.status.printed{background:#eaf8ef;color:#18864b}.empty{text-align:center;padding:45px;color:#718096}.printbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.sheet{width:210mm;height:297mm;min-height:297mm;background:#fff;margin:auto;padding:0;box-shadow:0 2px 12px #0002;display:grid;grid-template-columns:repeat(3,70mm);grid-template-rows:repeat(11,25mm);grid-auto-rows:25mm;align-content:start;gap:0;overflow:hidden}.label{width:70mm;height:25mm;border:1px dashed #bcc5cf;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;direction:rtl;font-size:11px;line-height:1.25;overflow:hidden}.label .name{font-weight:800;font-size:12px}.printnote{font-size:13px;color:#718096}.notice{padding:11px 13px;border-radius:9px;margin:12px 0;font-size:13px}.notice.info{background:#eef5ff;color:#315a91}.notice.error{background:#fff0ee;color:#a6362e}.notice.ok{background:#eaf8ef;color:#1b7b47}.muted{color:#718096;font-size:13px}.auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:#f5f7fa}.auth-card{width:100%;max-width:390px;background:#fff;border:1px solid #e1e6ec;border-radius:14px;padding:24px;box-shadow:0 10px 30px #00000010}.auth-logo{font-size:22px;font-weight:800;margin-bottom:26px}.auth-logo span{color:#2468d5}.auth-card h1{margin:0 0 8px;font-size:27px}.auth-card p{margin:0 0 20px;color:#718096;font-size:13px}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:16px}.tabs button{padding:9px;border:1px solid #d8dfe7;background:#fff;border-radius:8px;cursor:pointer}.tabs button.active{background:#eaf2ff;color:#2468d5;border-color:#bcd2f4;font-weight:700}.full{width:100%}.small{font-size:12px}.spinner{display:inline-block;width:14px;height:14px;border:2px solid #ffffff77;border-top-color:#fff;border-radius:50%;vertical-align:-2px;margin-right:7px;animation:spin .7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.autocomplete-wrap{position:relative}.suggestions{position:absolute;z-index:20;left:0;right:0;top:100%;background:#fff;border:1px solid #d5dce5;border-radius:8px;box-shadow:0 8px 20px #00000012;max-height:230px;overflow:auto}.suggestion{padding:10px 12px;cursor:pointer;border-bottom:1px solid #edf0f3;text-align:right;direction:rtl}.suggestion:last-child{border-bottom:0}.suggestion:hover{background:#eef5ff}.suggestion small{display:block;color:#718096;font-size:11px;margin-top:3px}.online-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#1b7b47;background:#eaf8ef;border:1px solid #cfead8;padding:5px 8px;border-radius:99px;margin-top:7px}
+@media(max-width:1000px){.sheet{transform-origin:top left;transform:scale(.75);margin-left:0}.side{width:180px}.toolbar{align-items:stretch;flex-direction:column}.search{width:100%}}
+@media print{body{background:#fff}.side,.top,.no-print,.printnote{display:none!important}.main{padding:0}.print-area{display:block!important}.sheet{box-shadow:none;margin:0;padding:0;width:210mm;min-height:297mm}}
+
+/* V7 recipient split view */
+.list-controls{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-bottom:14px}
+.list-controls .search{width:320px;max-width:100%}
+.recipient-columns{display:block;width:100%}
+.recipient-panel{background:#fff;border:1px solid #e1e6ec;border-radius:12px;overflow:hidden;box-shadow:0 1px 2px #00000004;min-width:0}.printed-collapsed{margin-top:14px}.printed-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border:0;padding:14px 18px;cursor:pointer;text-align:left;color:#17212b}.printed-toggle:hover{background:#fafbfc}.printed-summary{display:flex;align-items:center;gap:10px;font-weight:700}.printed-arrow{font-size:13px;color:#718096;transition:transform .15s ease}.printed-collapsed.open .printed-arrow{transform:rotate(180deg)}.printed-collapsed .printed-content{display:none}.printed-collapsed.open .printed-content{display:block}.printed-badge{font-size:12px;color:#18864b;background:#eaf8ef;border:1px solid #cfead8;border-radius:99px;padding:4px 8px}
+.recipient-panel.unprinted{border-top:4px solid #e2a726}
+.recipient-panel.printed-panel{border-top:4px solid #2aa66a}
+.panel-head{padding:16px 18px 12px;border-bottom:1px solid #edf0f3}
+.panel-title{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.panel-title h2{margin:0;font-size:18px}
+.panel-count{font-size:12px;color:#718096;background:#f5f7fa;border-radius:99px;padding:5px 9px}
+.panel-sub{font-size:12px;color:#718096;margin-top:5px}
+.panel-actions{display:flex;flex-wrap:wrap;gap:7px;padding:12px 18px;border-bottom:1px solid #edf0f3}.panel-actions .btn{padding:8px 11px;font-size:12px}
+.panel-select{display:flex;align-items:center;gap:8px;font-size:12px;color:#536171;font-weight:700;margin-right:auto}
+.panel-table{overflow:auto}.panel-table table{min-width:0;width:100%}
+.panel-table th,.panel-table td{padding:10px 8px;font-size:13px}
+.panel-footer{padding:10px 18px;font-size:12px;color:#718096;background:#fafbfc}
+.empty-panel{text-align:center;padding:35px 18px;color:#718096;font-size:13px}
+.search-hint{font-size:12px;color:#718096;margin:0 0 12px}
+@media(max-width:1050px){.main{width:auto}}
+@media print{.recipient-columns{display:block}.recipient-panel{border:0;box-shadow:none}.printed-collapsed{display:none!important}}
+
+
+.all-recipient-status{white-space:nowrap}.card .panel-head{border-bottom:1px solid #edf0f3}.card .panel-table{margin-top:0}
+@media(max-width:900px){.main{padding:22px}.side{width:190px}.main{width:calc(100% - 190px)}}
+@media(max-width:720px){.app{display:block}.side{width:100%;border-right:0;border-bottom:1px solid #e1e6ec}.main{width:100%;padding:18px}.recipient-panel{width:100%}.top{align-items:flex-start;flex-direction:column}.top .btn{align-self:flex-end}.list-controls{justify-content:stretch!important}.search{width:100%}}
+</style>
+</head>
+<body>
+<div id="auth" class="auth-wrap">
+  <div class="auth-card">
+    <div class="auth-logo">Wonder <span>Label</span></div>
+    <h1 id="authTitle">Sign in</h1>
+    <p>Envelope recipients are stored online in your private account.</p>
+    <div class="tabs">
+      <button id="tabSignIn" class="active" onclick="switchAuth('signin')">Sign in</button>
+      <button id="tabSignUp" onclick="switchAuth('signup')">Create account</button>
+    </div>
+    <div id="authNotice" class="notice hidden"></div>
+    <div class="field"><label>Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com"></div>
+    <div class="field"><label>Password</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="Password"></div>
+    <button id="authBtn" class="btn full" onclick="submitAuth()">Sign in</button>
+    <div class="muted small" style="margin-top:13px">Your database password is never needed here.</div>
+  </div>
+</div>
+
+<div id="app" class="app hidden">
+<aside class="side"><div class="logo">Wonder <span>Label</span></div><div class="account"><b id="accountEmail">Signed in</b>Online database</div><div class="nav">
+<button class="active" onclick="show('home',this)">⌂ Home</button>
+<button onclick="show('recipients',this)">▦ Recipient Lists</button>
+<button onclick="show('new',this)">＋ Add Recipient</button>
+<button onclick="show('print',this)">▣ Print</button>
+</div><button class="btn gray logout" onclick="logout()">Sign out</button></aside>
+<main class="main">
+<section id="home">
+<div class="top"><h1>Home</h1><button class="btn" onclick="startNew()">＋ Add Recipient</button></div>
+<div id="appNotice" class="notice hidden"></div>
+<p class="search-hint">Your daily work queue: <b>To Print</b> shows recipients whose labels still need to be printed. Printed history stays collapsed below.</p>
+<div class="recipient-panel unprinted">
+  <div class="panel-head">
+    <div class="panel-title"><h2>To Print</h2><span class="panel-count" id="unprintedCount">0</span></div>
+    <div class="panel-sub">Recipients currently waiting for their envelope label to be printed.</div>
+  </div>
+  <div class="panel-actions">
+    <label class="panel-select"><input id="unprintedAll" class="check" type="checkbox" onchange="toggleSectionAll('unprinted',this.checked)"> Select all</label>
+    <button class="btn" onclick="prepareUnprintedSelected()">🖨 Print selected</button>
+    <button class="btn gray" onclick="prepareUnprintedAll()">🖨 Print all</button>
+    <button class="btn gray" onclick="markSectionPrinted('unprinted')">✓ Mark printed</button>
+    <button class="btn red" onclick="deleteSectionSelected('unprinted')">Delete selected</button>
+  </div>
+  <div class="panel-table"><table><thead><tr><th></th><th>Name</th><th>City</th><th>Street</th><th>No.</th><th>Apt.</th><th></th></tr></thead><tbody id="unprintedBody"></tbody></table></div>
+  <div class="panel-footer" id="unprintedFooter">0 selected</div>
+</div>
+<div class="recipient-panel printed-collapsed" id="printedPanel">
+  <button class="printed-toggle" onclick="togglePrintedPanel()">
+    <span class="printed-summary">🟢 Printed <span class="printed-badge" id="printedBadge">0</span><span class="muted">Completed labels · history & reprinting</span></span>
+    <span class="printed-arrow">▼</span>
+  </button>
+  <div class="printed-content">
+    <div class="panel-head">
+      <div class="panel-title"><h2>Printed</h2><span class="panel-count" id="printedCount">0</span></div>
+      <div class="panel-sub">Completed labels. You can reprint or move them back to the To Print queue.</div>
+    </div>
+    <div class="panel-actions">
+      <label class="panel-select"><input id="printedAll" class="check" type="checkbox" onchange="toggleSectionAll('printed',this.checked)"> Select all</label>
+      <button class="btn" onclick="preparePrintedSelected()">🖨 Reprint selected</button>
+      <button class="btn gray" onclick="preparePrintedAll()">🖨 Reprint all</button>
+      <button class="btn gray" onclick="markSectionUnprinted('printed')">↩ Move to To Print</button>
+      <button class="btn red" onclick="deleteSectionSelected('printed')">Delete selected</button>
+    </div>
+    <div class="panel-table"><table><thead><tr><th></th><th>Name</th><th>City</th><th>Street</th><th>No.</th><th>Apt.</th><th></th></tr></thead><tbody id="printedBody"></tbody></table></div>
+    <div class="panel-footer" id="printedFooter">0 selected</div>
+  </div>
+</div>
+</section>
+
+<section id="recipients" style="display:none">
+<div class="top"><h1>Recipient Lists</h1><button class="btn" onclick="startNew()">＋ Add Recipient</button></div>
+<div class="list-controls">
+  <input id="searchAll" class="search" placeholder="Search name, city, street..." oninput="renderAllRecipients(this.value)">
+</div>
+<div class="card" style="padding:0;overflow:hidden">
+  <div class="panel-head"><div class="panel-title"><h2>All recipients</h2><span class="panel-count" id="allRecipientsCount">0</span></div><div class="panel-sub">Your complete customer and address list, regardless of print status.</div></div>
+  <div class="panel-table"><table><thead><tr><th>Status</th><th>Name</th><th>City</th><th>Street</th><th>No.</th><th>Apt.</th><th></th></tr></thead><tbody id="allRecipientsBody"></tbody></table></div>
+</div>
+</section>
+
+<section id="new" style="display:none">
+<div class="top"><h1 id="formTitle">Add Recipient</h1><div class="muted">Online database · smart customer + street suggestions</div></div>
+<div class="card form"><h2>Envelope address</h2>
+<div id="formNotice" class="notice hidden"></div>
+<div class="field autocomplete-wrap"><label>Name</label><input id="name" class="rtl" placeholder="שם מלא — התחל להקליד" autocomplete="off"><div id="nameSuggest" class="suggestions hidden"></div></div>
+<div class="field"><label>City</label><input id="city" class="rtl" list="cityList" placeholder="הקלד עיר" autocomplete="off"><datalist id="cityList"></datalist><div class="muted" id="cityHint">בחר עיר כדי לקבל רחובות מתאימים</div></div>
+<div class="field autocomplete-wrap"><label>Street</label><input id="street" class="rtl" placeholder="הקלד לפחות אות אחת" autocomplete="off"><div id="streetSuggest" class="suggestions hidden"></div></div>
+<div class="row"><div class="field"><label>House number</label><input id="num"></div><div class="field"><label>Apartment (optional)</label><input id="apt"></div></div>
+<div class="actions"><button class="btn" onclick="saveRecipient()">Save recipient</button><button class="btn gray" onclick="cancelForm()">Cancel</button></div>
+</div></section>
+
+<section id="print" style="display:none">
+<div class="top"><h1>Print</h1><div class="actions"><button class="btn gray" onclick="show('home',document.querySelector('.nav button'))">Back</button><button class="btn" onclick="doPrint()">🖨 Print A4</button></div></div>
+<div class="printbar"><div><b id="printcount">0</b> labels</div><div class="printnote">Temporary layout: A4 · 70 × 25 mm · 3 × 11 = 33 labels</div></div>
+<div class="print-area"><div class="sheet" id="sheet"></div></div>
+</section>
+</main></div>
+
+<script>
+const SUPABASE_URL='https://wigweetkckkdzcjwitlv.supabase.co';
+const SUPABASE_KEY='sb_publishable_NN1vSQYa1jTntllnmcxiHQ_Xj7cNza1';
+const SESSION_KEY='envelopeMailSupabaseSessionV5';
+let session=null, recipients=[], printIds=[], editingId=null, authMode='signin';
+
+function esc(x){return String(x ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')}
+function v(id){return document.getElementById(id).value}
+function setNotice(id,msg,type='info'){const el=document.getElementById(id);if(!msg){el.className='notice hidden';el.textContent='';return}el.className='notice '+type;el.textContent=msg}
+function savedSession(){try{return JSON.parse(localStorage.getItem(SESSION_KEY)||'null')}catch{return null}}
+function saveSession(s){session=s;localStorage.setItem(SESSION_KEY,JSON.stringify(s))}
+function clearSession(){session=null;localStorage.removeItem(SESSION_KEY)}
+function headers(auth=true){const h={'apikey':SUPABASE_KEY,'Content-Type':'application/json'};if(auth&&session?.access_token)h.Authorization='Bearer '+session.access_token;return h}
+
+async function api(path,opts={},auth=true,retry=true){
+  const res=await fetch(SUPABASE_URL+path,{...opts,headers:{...headers(auth),...(opts.headers||{})}});
+  if(res.status===401&&auth&&retry&&session?.refresh_token){
+    const refreshed=await refreshSession();
+    if(refreshed)return api(path,opts,auth,false);
+  }
+  const text=await res.text();let data=null;try{data=text?JSON.parse(text):null}catch{data=text}
+  if(!res.ok){const msg=data?.msg||data?.message||data?.error_description||data?.error||`Request failed (${res.status})`;throw new Error(msg)}
+  return data;
+}
+
+async function refreshSession(){
+  if(!session?.refresh_token)return false;
+  try{
+    const data=await api('/auth/v1/token?grant_type=refresh_token',{method:'POST',body:JSON.stringify({refresh_token:session.refresh_token})},false,false);
+    saveSession(data);return true;
+  }catch{clearSession();showAuth();return false}
+}
+
+function switchAuth(mode){authMode=mode;document.getElementById('authTitle').textContent=mode==='signin'?'Sign in':'Create account';document.getElementById('authBtn').textContent=mode==='signin'?'Sign in':'Create account';document.getElementById('tabSignIn').classList.toggle('active',mode==='signin');document.getElementById('tabSignUp').classList.toggle('active',mode==='signup');setNotice('authNotice','')}
+
+async function submitAuth(){
+  const email=v('authEmail').trim(),password=v('authPassword');
+  setNotice('authNotice','');
+  if(!email||!password)return setNotice('authNotice','Please enter your email and password.','error');
+  const btn=document.getElementById('authBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>Please wait...';
+  try{
+    if(authMode==='signup'){
+      const data=await api('/auth/v1/signup',{method:'POST',body:JSON.stringify({email,password})},false,false);
+      if(data?.access_token){saveSession(data);showApp();await loadRecipients();}
+      else {setNotice('authNotice','Account created. Check your email for the confirmation link, then come back here and sign in.','ok');switchAuth('signin');document.getElementById('authEmail').value=email;document.getElementById('authPassword').value='';}
+    }else{
+      const data=await api('/auth/v1/token?grant_type=password',{method:'POST',body:JSON.stringify({email,password})},false,false);
+      saveSession(data);showApp();await loadRecipients();
+    }
+  }catch(e){setNotice('authNotice',friendlyAuthError(e.message),'error')}
+  finally{btn.disabled=false;btn.textContent=authMode==='signin'?'Sign in':'Create account'}
+}
+function friendlyAuthError(msg){if(/email.*confirm|not confirmed/i.test(msg))return 'Please confirm your email address first, then sign in.';if(/invalid login credentials/i.test(msg))return 'Incorrect email or password.';if(/already registered|already exists/i.test(msg))return 'That email already has an account. Switch to Sign in.';return msg}
+
+function showAuth(){document.getElementById('auth').classList.remove('hidden');document.getElementById('app').classList.add('hidden')}
+function showApp(){document.getElementById('auth').classList.add('hidden');document.getElementById('app').classList.remove('hidden');document.getElementById('accountEmail').textContent=session?.user?.email||'Signed in'}
+async function boot(){session=savedSession();if(session?.access_token){try{showApp();await loadRecipients();return}catch{clearSession()}}showAuth()}
+
+async function logout(){
+  try{if(session?.access_token)await api('/auth/v1/logout',{method:'POST'},true,false)}catch{}
+  clearSession();recipients=[];showAuth();switchAuth('signin');setNotice('authNotice','Signed out.','ok')
+}
+
+async function loadRecipients(){
+  setNotice('appNotice','');
+  try{
+    recipients=await api('/rest/v1/recipients?select=*&order=created_at.desc',{method:'GET'});
+    if(!Array.isArray(recipients))recipients=[];
+    const valid=new Set(recipients.map(r=>String(r.id)));
+    selection.unprinted.forEach(id=>{if(!valid.has(id)||recipients.find(r=>String(r.id)===id)?.printed)selection.unprinted.delete(id)});
+    selection.printed.forEach(id=>{if(!valid.has(id)||!recipients.find(r=>String(r.id)===id)?.printed)selection.printed.delete(id)});
+    render();
+  }catch(e){
+    setNotice('appNotice','Could not load recipients: '+e.message,'error');
+  }
+}
+
+function dbToUi(r){return {id:r.id,name:r.full_name||'',city:r.city||'',street:r.street||'',num:r.house_number||'',apt:r.apartment||'',printed:!!r.printed,created_at:r.created_at}}
+function uiList(){return recipients.map(dbToUi)}
+function getLocal(id){return recipients.find(r=>String(r.id)===String(id))}
+let selection={unprinted:new Set(),printed:new Set()};
+function filteredRows(section,filter=''){const q=String(filter||'').toLowerCase();return uiList().filter(r=>section==='printed'?r.printed:!r.printed).filter(r=>(r.name+r.city+r.street+r.num+r.apt).toLowerCase().includes(q))}
+function renderPanel(section,filter=''){
+  const rows=filteredRows(section,filter);
+  const body=document.getElementById(section+'Body');
+  const selected=selection[section];
+  const allForSection=uiList().filter(r=>section==='printed'?r.printed:!r.printed);
+  const visibleIds=new Set(rows.map(r=>String(r.id)));
+  [...selected].forEach(id=>{if(!allForSection.some(r=>String(r.id)===id))selected.delete(id)});
+  body.innerHTML=rows.length?rows.map(r=>`<tr><td><input class="check" type="checkbox" data-section="${section}" data-id="${r.id}" ${selected.has(String(r.id))?'checked':''} onchange="toggleRow('${section}','${r.id}',this.checked)"></td><td class="rtl">${esc(r.name)}</td><td>${esc(r.city)}</td><td class="rtl">${esc(r.street)}</td><td>${esc(r.num)}</td><td>${esc(r.apt||'—')}</td><td><button class="btn gray" onclick="editRecipient('${r.id}')">Edit</button></td></tr>`).join(''):`<tr><td colspan="7" class="empty-panel">${section==='printed'?'No printed recipients.':'No recipients waiting to be printed.'}</td></tr>`;
+  const total=allForSection.length;
+  document.getElementById(section+'Count').textContent=`${total}`; if(section==='printed'){document.getElementById('printedBadge').textContent=String(total)}
+  document.getElementById(section+'Footer').textContent=`${selected.size} selected${visibleIds.size!==total?' · '+visibleIds.size+' shown':''}`;
+  const allBox=document.getElementById(section+'All');
+  allBox.checked=rows.length>0 && rows.every(r=>selected.has(String(r.id)));
+  allBox.indeterminate=rows.some(r=>selected.has(String(r.id))) && !allBox.checked;
+}
+function render(filter=''){renderPanel('unprinted',filter);renderPanel('printed',filter)}
+function renderAllRecipients(filter=''){
+  const q=norm(filter);
+  const rows=uiList().filter(r=>!q || [r.name,r.city,r.street,r.num,r.apt].some(x=>norm(x).includes(q)));
+  document.getElementById('allRecipientsCount').textContent=rows.length;
+  const body=document.getElementById('allRecipientsBody');
+  if(!rows.length){body.innerHTML='<tr><td colspan=7 class=empty>No recipients found.</td></tr>';return;}
+  body.innerHTML=rows.map(r=>`<tr><td><span class="status ${r.printed?'printed':''}">${r.printed?'Printed':'To print'}</span></td><td>${esc(r.name)}</td><td>${esc(r.city)}</td><td>${esc(r.street)}</td><td>${esc(r.num)}</td><td>${r.apt?esc(r.apt):'—'}</td><td><button class="btn gray small" onclick="editRecipient('${encodeURIComponent(r.id)}')">Edit</button></td></tr>`).join('');
+}
+function toggleRow(section,id,checked){if(checked)selection[section].add(String(id));else selection[section].delete(String(id));render(document.getElementById('search').value)}
+function toggleSectionAll(section,checked){const rows=filteredRows(section,document.getElementById('search').value);rows.forEach(r=>{const id=String(r.id);if(checked)selection[section].add(id);else selection[section].delete(id)});render(document.getElementById('search').value)}
+function ids(section){return [...selection[section]]}
+function togglePrintedPanel(){const p=document.getElementById('printedPanel');p.classList.toggle('open')}
+function show(id,btn){document.querySelectorAll('main section').forEach(s=>s.style.display='none');document.getElementById(id).style.display='block';document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');if(id==='home')render('');if(id==='recipients')renderAllRecipients(document.getElementById('searchAll').value);}
+function startNew(){editingId=null;document.getElementById('formTitle').textContent='Add Recipient';clearForm();setNotice('formNotice','');loadCities().catch(()=>{});loadStreetsForCity(v('city')).catch(()=>{});show('new',document.querySelectorAll('.nav button')[2])}
+function clearForm(){document.getElementById('name').value='';document.getElementById('city').value='';document.getElementById('street').value='';document.getElementById('num').value='';document.getElementById('apt').value='';hideSuggestions()}
+function cancelForm(){editingId=null;show('home',document.querySelector('.nav button'));}
+
+
+const CITY_RESOURCE='5c78e9fa-c2e2-4771-93ff-7f400a12f7ba';
+const STREET_RESOURCE='a7296d1a-f8c9-4b70-96c2-6ebb4352f8e3';
+let citiesLoaded=false, cityCache=[];
+let streetCacheByCity={};
+
+function norm(s){return String(s||'').trim().toLowerCase().replace(/[\s\-׳׳']/g,'');}
+function hideSuggestions(){['nameSuggest','streetSuggest'].forEach(id=>{const e=document.getElementById(id);if(e)e.classList.add('hidden');});}
+function fillFromRecipient(r){document.getElementById('name').value=r.name||'';document.getElementById('city').value=r.city||'';document.getElementById('street').value=r.street||'';document.getElementById('num').value=r.num||'';document.getElementById('apt').value=r.apt||'';hideSuggestions();loadStreetsForCity(r.city||'').catch(()=>{});}
+function renderNameSuggestions(){
+  const q=norm(v('name')); const box=document.getElementById('nameSuggest');
+  if(!q||q.length<2){box.classList.add('hidden');box.innerHTML='';return;}
+  const seen=new Set();
+  const matches=uiList().filter(r=>norm(r.name).includes(q)).filter(r=>{const k=norm(r.name)+'|'+norm(r.street)+'|'+norm(r.num);if(seen.has(k))return false;seen.add(k);return true;}).slice(0,8);
+  if(!matches.length){box.classList.add('hidden');box.innerHTML='';return;}
+  box.innerHTML=matches.map((r,i)=>`<div class="suggestion" data-i="${i}">${esc(r.name)}<small>${esc([r.city,r.street,r.num,r.apt?('דירה '+r.apt):''].filter(Boolean).join(' · '))}</small></div>`).join('');
+  [...box.children].forEach((el,i)=>el.onclick=()=>fillFromRecipient(matches[i])); box.classList.remove('hidden');
+}
+async function govQuery(resourceId, params){
+  const u=new URL('https://data.gov.il/api/3/action/datastore_search'); u.searchParams.set('resource_id',resourceId); u.searchParams.set('limit',String(params.limit||100));
+  if(params.q)u.searchParams.set('q',params.q); if(params.filters)u.searchParams.set('filters',JSON.stringify(params.filters));
+  const r=await fetch(u.toString()); if(!r.ok)throw new Error('Government address service unavailable'); const d=await r.json(); if(!d.success)throw new Error('Government address service unavailable'); return d.result?.records||[];
+}
+async function loadCities(){
+  if(citiesLoaded)return;
+  const fallback=['בית שמש','ירושלים','ביתר עילית','בני ברק','מודיעין עילית','רמת גן','תל אביב - יפו','פתח תקווה','אשדוד','אשקלון','חיפה','נתניה','צפת','טבריה','רחובות','אלעד','בית אל','קריית גת','באר שבע','מגדל העמק','צפת','עמנואל','רכסים','בני ברק','מכבים-רעות'];
+  cityCache=[...fallback];
+  try{const rows=await govQuery(CITY_RESOURCE,{limit:5000}); const names=rows.map(r=>r['שם_ישוב']).filter(Boolean); cityCache=[...new Set([...cityCache,...names])].sort((a,b)=>a.localeCompare(b,'he'));}catch{}
+  const dl=document.getElementById('cityList'); dl.innerHTML=cityCache.map(c=>`<option value="${esc(c)}"></option>`).join(''); citiesLoaded=true;
+}
+function cityLabelMatch(city, row){return norm(row['שם_ישוב'])===norm(city)}
+async function loadStreetsForCity(city){
+  document.getElementById('cityHint').textContent='טוען רחובות לעיר...';
+  if(!city){document.getElementById('cityHint').textContent='בחר עיר כדי לקבל רחובות מתאימים';return []}
+  const key=norm(city); if(streetCacheByCity[key]){document.getElementById('cityHint').textContent=`נטענו ${streetCacheByCity[key].length} רחובות`;return streetCacheByCity[key]}
+  try{
+    // First resolve the settlement code from the current city name.
+    const cityRows=await govQuery(CITY_RESOURCE,{limit:100,q:city});
+    const cr=cityRows.find(r=>cityLabelMatch(city,r));
+    const code=cr?.['סמל_ישוב'];
+    const rows=code?await govQuery(STREET_RESOURCE,{limit:5000,filters:{'סמל_ישוב':code}}):await govQuery(STREET_RESOURCE,{limit:5000,q:city});
+    const streets=[...new Set(rows.map(r=>r['שם_רחוב']).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'he'));
+    streetCacheByCity[key]=streets; document.getElementById('cityHint').textContent=`נטענו ${streets.length} רחובות`;
+    return streets;
+  }catch(e){document.getElementById('cityHint').textContent='לא ניתן לטעון כרגע את רשימת הרחובות — אפשר להקליד ידנית'; return []}
+}
+async function renderStreetSuggestions(){
+  const city=v('city'), q=norm(v('street')), box=document.getElementById('streetSuggest');
+  if(q.length<1){box.classList.add('hidden');box.innerHTML='';return}
+  const streets=await loadStreetsForCity(city); const matches=streets.filter(s=>norm(s).includes(q)).slice(0,10);
+  if(!matches.length){box.classList.add('hidden');box.innerHTML='';return}
+  box.innerHTML=matches.map(s=>`<div class="suggestion">${esc(s)}</div>`).join('');
+  [...box.children].forEach((el,i)=>el.onclick=()=>{document.getElementById('street').value=matches[i];box.classList.add('hidden')}); box.classList.remove('hidden');
+}
+
+document.getElementById('name').addEventListener('input',renderNameSuggestions);
+document.getElementById('street').addEventListener('input',()=>renderStreetSuggestions());
+document.getElementById('city').addEventListener('change',()=>{document.getElementById('street').value='';hideSuggestions();loadStreetsForCity(v('city'));});
+document.getElementById('city').addEventListener('input',()=>{loadStreetsForCity(v('city'))});
+document.addEventListener('click',(e)=>{if(!e.target.closest('.autocomplete-wrap'))document.getElementById('nameSuggest')?.classList.add('hidden')});
+loadCities().catch(()=>{});
+
+async function saveRecipient(){
+  const payload={full_name:v('name').trim(),city:v('city').trim(),street:v('street').trim(),house_number:v('num').trim(),apartment:v('apt').trim(),printed:false,user_id:session?.user?.id};
+  if(!payload.full_name)return setNotice('formNotice','Please enter a name.','error');
+  if(!payload.city)return setNotice('formNotice','Please enter a city.','error');
+  if(!payload.street)return setNotice('formNotice','Please enter a street.','error');
+  if(!payload.house_number)return setNotice('formNotice','Please enter a house number.','error');
+  if(!session?.user?.id)return showAuth();
+  const isEdit=editingId!==null;
+  const btn=document.querySelector('#new .btn');btn.disabled=true;
+  setNotice('formNotice','Saving...','info');
+  try{
+    if(isEdit){
+      delete payload.user_id;delete payload.printed;
+      const data=await api(`/rest/v1/recipients?id=eq.${encodeURIComponent(editingId)}`,{method:'PATCH',headers:{Prefer:'return=representation'},body:JSON.stringify(payload)});
+      if(!data?.length)throw new Error('Recipient was not updated.');
+      setNotice('formNotice','Saved.','ok');
+    }else{
+      const data=await api('/rest/v1/recipients',{method:'POST',headers:{Prefer:'return=representation'},body:JSON.stringify(payload)});
+      if(!data?.length)throw new Error('Recipient was not saved.');
+    }
+    editingId=null;clearForm();await loadRecipients();show('home',document.querySelector('.nav button'));setNotice('appNotice',isEdit?'Recipient updated.':'Recipient added.','ok');
+  }catch(e){setNotice('formNotice','Could not save recipient: '+e.message,'error')}
+  finally{btn.disabled=false}
+}
+
+function editRecipient(id){id=decodeURIComponent(id);const r=dbToUi(getLocal(id));if(!r)return;editingId=id;document.getElementById('formTitle').textContent='Edit Recipient';document.getElementById('name').value=r.name;document.getElementById('city').value=r.city;document.getElementById('street').value=r.street;document.getElementById('num').value=r.num;document.getElementById('apt').value=r.apt;setNotice('formNotice','');loadStreetsForCity(r.city).catch(()=>{});show('new',document.querySelectorAll('.nav button')[2])}
+
+async function markSectionPrinted(section){const a=ids(section);if(!a.length)return alert('Select recipients first.');try{for(const id of a){await api(`/rest/v1/recipients?id=eq.${encodeURIComponent(id)}`,{method:'PATCH',body:JSON.stringify({printed:true})})}selection[section].clear();await loadRecipients();setNotice('appNotice',`${a.length} recipient${a.length===1?'':'s'} marked printed.`,'ok')}catch(e){setNotice('appNotice','Could not mark printed: '+e.message,'error')}}
+async function markSectionUnprinted(section){const a=ids(section);if(!a.length)return alert('Select recipients first.');try{for(const id of a){await api(`/rest/v1/recipients?id=eq.${encodeURIComponent(id)}`,{method:'PATCH',body:JSON.stringify({printed:false})})}selection[section].clear();await loadRecipients();setNotice('appNotice',`${a.length} recipient${a.length===1?'':'s'} moved back to the To Print queue.`,'ok')}catch(e){setNotice('appNotice','Could not change status: '+e.message,'error')}}
+async function deleteSectionSelected(section){const a=ids(section);if(!a.length)return alert('Select recipients first.');if(!confirm('Delete selected recipients?'))return;try{for(const id of a){await api(`/rest/v1/recipients?id=eq.${encodeURIComponent(id)}`,{method:'DELETE'})}selection[section].clear();await loadRecipients();setNotice('appNotice',`${a.length} recipient${a.length===1?'':'s'} deleted.`,'ok')}catch(e){setNotice('appNotice','Could not delete: '+e.message,'error')}}
+
+function prepareUnprintedSelected(){const a=ids('unprinted');if(!a.length)return alert('Select at least one recipient to print.');openPrint(a)}
+function preparePrintedSelected(){const a=ids('printed');if(!a.length)return alert('Select at least one printed recipient to reprint.');openPrint(a)}
+function prepareUnprintedAll(){const a=uiList().filter(r=>!r.printed).map(r=>String(r.id));if(!a.length)return alert('There are no recipients waiting to be printed.');openPrint(a)}
+function preparePrintedAll(){const a=uiList().filter(r=>r.printed).map(r=>String(r.id));if(!a.length)return alert('There are no printed recipients.');openPrint(a)}
+function prepareSelected(){prepareUnprintedSelected()}
+function prepareAll(){prepareUnprintedAll()}
+function markSelectedPrinted(){markSectionPrinted('unprinted')}
+function deleteSelected(){deleteSectionSelected('unprinted')}
+function openPrint(a){printIds=a;let list=a.map(id=>getLocal(id)?dbToUi(getLocal(id)):null).filter(Boolean);let sheet=document.getElementById('sheet');sheet.innerHTML=list.map(r=>`<div class="label"><div class="name">${esc(r.name)}</div><div>${esc(r.street)} ${esc(r.num)}</div>${r.apt?`<div>דירה ${esc(r.apt)}</div>`:''}<div>${esc(r.city)}</div></div>`).join('');document.getElementById('printcount').textContent=list.length;show('print',document.querySelectorAll('.nav button')[3])}
+async function doPrint(){window.print();setTimeout(async()=>{try{for(const id of printIds){await api(`/rest/v1/recipients?id=eq.${encodeURIComponent(id)}`,{method:'PATCH',body:JSON.stringify({printed:true})})}selection.unprinted.clear();selection.printed.clear();await loadRecipients()}catch(e){setNotice('appNotice','Printed, but status could not be updated: '+e.message,'error')}},500)}
+
+boot();
+</script>
+</body>
+</html>
