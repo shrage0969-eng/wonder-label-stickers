@@ -44,22 +44,24 @@
   if (typeof module !== 'undefined') module.exports = root.StickerLogic;
 })(typeof window !== 'undefined' ? window : globalThis);
 
-/* Wonder Label preferences — intentionally local to this browser for now. */
+/* Wonder Label settings center. Preferences intentionally remain local to this browser for now. */
 (function () {
-  const KEY = 'wonderLabelSettingsV1';
+  const KEY = 'wonderLabelSettingsV2';
   const DEFAULTS = {
     printConfirmation: true,
     confirmDelete: true,
     keepPrintedCollapsed: true,
     compactTables: false,
     rememberLastCity: true,
-    defaultCity: 'בית שמש',
+    focusNameOnAdd: true,
+    defaultCity: '',
     lastCity: ''
   };
 
   function readSettings() {
     try {
-      return { ...DEFAULTS, ...(JSON.parse(localStorage.getItem(KEY) || '{}') || {}) };
+      const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+      return { ...DEFAULTS, ...(saved && typeof saved === 'object' ? saved : {}) };
     } catch {
       return { ...DEFAULTS };
     }
@@ -83,130 +85,157 @@
       .settings-nav{margin-top:5px}
       .nav button.settings-nav-btn{color:#a9bddb}
       .nav button.settings-nav-btn.active{background:rgba(112,164,241,.20);color:#fff}
-      .settings-wrap{max-width:920px}
-      .settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-      .settings-card{padding:18px 19px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
-      .settings-card h2{margin:0;color:var(--navy);font-size:16px;letter-spacing:-.2px}
-      .settings-card p{margin:5px 0 14px;color:var(--muted);font-size:12px}
-      .setting-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:13px 0;border-top:1px solid var(--line-soft)}
-      .setting-row:first-child{border-top:0;padding-top:0}
-      .setting-copy{min-width:0}.setting-name{display:block;color:var(--ink);font-size:13px;font-weight:750}.setting-desc{display:block;margin-top:3px;color:var(--muted);font-size:11px;line-height:1.4}
+      .settings-wrap{max-width:1000px}
+      .settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+      .settings-card{padding:21px;background:linear-gradient(180deg,#fff 0%,#fbfdff 100%);border:1px solid var(--line);border-radius:15px;box-shadow:0 10px 28px rgba(24,42,72,.055)}
+      .settings-card h2{margin:0;color:var(--navy);font-size:17px;letter-spacing:-.25px}
+      .settings-card > p{margin:6px 0 16px;color:var(--muted);font-size:12px;line-height:1.5}
+      .wl-setting-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 0;border-top:1px solid var(--line-soft);cursor:pointer}
+      .wl-setting-row:first-of-type{border-top:0;padding-top:0}
+      .wl-setting-copy{min-width:0;flex:1}
+      .wl-setting-name{display:block;color:var(--ink);font-size:13px;font-weight:780;line-height:1.3}
+      .wl-setting-desc{display:block;margin-top:4px;color:var(--muted);font-size:11px;line-height:1.45}
+      .wl-setting-row:hover .wl-setting-name{color:var(--navy)}
       .wm-switch{position:relative;display:inline-flex;flex:0 0 auto}
       .wm-switch input{position:absolute;opacity:0;pointer-events:none}
-      .wm-switch span{width:42px;height:24px;border-radius:99px;background:#cfd8e6;box-shadow:inset 0 0 0 1px #bcc8d9;cursor:pointer;transition:.18s ease;position:relative}
-      .wm-switch span:after{content:"";position:absolute;width:18px;height:18px;top:3px;left:3px;border-radius:50%;background:#fff;box-shadow:0 2px 5px rgba(18,33,61,.18);transition:.18s ease}
+      .wm-switch span{width:44px;height:25px;border-radius:99px;background:#cfd8e6;box-shadow:inset 0 0 0 1px #bcc8d9;position:relative;transition:background .18s ease,box-shadow .18s ease}
+      .wm-switch span:after{content:"";position:absolute;width:19px;height:19px;top:3px;left:3px;border-radius:50%;background:#fff;box-shadow:0 2px 5px rgba(18,33,61,.18);transition:transform .18s ease}
       .wm-switch input:checked + span{background:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
-      .wm-switch input:checked + span:after{transform:translateX(18px)}
-      .wm-select{width:100%;padding:10px 12px;border:1px solid #ced9e8;border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-size:13px}
-      .settings-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;padding:14px 16px;border:1px dashed #cad7e8;border-radius:12px;background:#f8fbff;color:var(--muted);font-size:12px}
+      .wm-switch input:checked + span:after{transform:translateX(19px)}
+      .wm-switch input:focus-visible + span{outline:3px solid rgba(69,135,234,.22);outline-offset:2px}
+      .wm-select{width:100%;padding:11px 12px;border:1px solid #ced9e8;border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-size:13px;transition:border-color .18s ease,box-shadow .18s ease}
+      .wm-select:focus{border-color:#4d83d8;box-shadow:0 0 0 3px rgba(77,131,216,.12);outline:0}
+      .settings-note{display:flex;align-items:flex-start;gap:10px;margin-top:9px;padding:10px 12px;border:1px solid #d9e6f3;border-radius:10px;background:#f7fbff;color:#5d7088;font-size:11px;line-height:1.45}
+      .settings-note strong{color:var(--navy);flex:0 0 auto}
+      .settings-status{display:inline-flex;align-items:center;gap:6px;flex:0 0 auto;padding:4px 8px;border:1px solid #ccead8;border-radius:99px;background:var(--green-soft);color:var(--green);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+      .settings-footer{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:18px;padding:14px 16px;border:1px dashed #cbd8e7;border-radius:12px;background:#f8fbff;color:var(--muted);font-size:12px;line-height:1.45}
       .settings-footer b{color:var(--navy)}
-      .settings-reset{font:inherit;border:0;background:transparent;color:var(--blue);font-weight:750;cursor:pointer}
+      .settings-reset{font:inherit;border:1px solid #d5e0ec;border-radius:8px;background:#fff;color:#36506f;padding:8px 11px;font-weight:750;cursor:pointer;white-space:nowrap;transition:background .18s ease,border-color .18s ease,transform .18s ease}
+      .settings-reset:hover{background:#f8fbff;border-color:#b9c9dc;transform:translateY(-1px)}
       .wm-compact .panel-table th,.wm-compact .panel-table td{padding-top:8px;padding-bottom:8px;font-size:12px}
       .wm-compact .recipient-panel .panel-head{padding-top:15px;padding-bottom:11px}
       .wm-compact .panel-actions{padding-top:9px;padding-bottom:9px}
       .wm-compact .printed-toggle{padding-top:12px;padding-bottom:12px}
-      @media(max-width:720px){.settings-grid{grid-template-columns:1fr}.settings-footer{align-items:flex-start;flex-direction:column}}
+      @media(max-width:760px){.settings-grid{grid-template-columns:1fr}.settings-footer{align-items:flex-start;flex-direction:column}.settings-reset{align-self:flex-start}}
     `;
     document.head.appendChild(style);
   }
 
-  function makeToggle(id, checked, label, description) {
-    return `<div class="setting-row"><div class="setting-copy"><span class="setting-name">${label}</span><span class="setting-desc">${description}</span></div><label class="wm-switch"><input id="${id}" type="checkbox" ${checked ? 'checked' : ''}><span></span></label></div>`;
+  function toggleMarkup(id, checked, label, description) {
+    return `<label class="wl-setting-row"><span class="wl-setting-copy"><span class="wl-setting-name">${label}</span><span class="wl-setting-desc">${description}</span></span><span class="wm-switch"><input id="${id}" type="checkbox" ${checked ? 'checked' : ''}><span aria-hidden="true"></span></span></label>`;
   }
 
-  function ensureSettingsUi() {
-    if (document.getElementById('settings')) return;
-    const nav = document.querySelector('.nav');
+  const cityOptions = [
+    ['', 'No default city'], ['בית שמש', 'בית שמש'], ['ירושלים', 'ירושלים'], ['ביתר עילית', 'ביתר עילית'],
+    ['בני ברק', 'בני ברק'], ['מודיעין עילית', 'מודיעין עילית'], ['רמת גן', 'רמת גן'], ['פתח תקווה', 'פתח תקווה'],
+    ['אשדוד', 'אשדוד'], ['חיפה', 'חיפה'], ['נתניה', 'נתניה'], ['אלעד', 'אלעד'], ['טבריה', 'טבריה'],
+    ['צפת', 'צפת'], ['באר שבע', 'באר שבע'], ['תל אביב-יפו', 'תל אביב-יפו']
+  ];
+
+  function renderSettingsSection() {
     const main = document.querySelector('main.main');
-    if (!nav || !main) return;
+    const nav = document.querySelector('.nav');
+    if (!main || !nav) return;
 
-    const button = document.createElement('button');
-    button.className = 'settings-nav-btn';
-    button.textContent = '⚙ Settings';
-    button.type = 'button';
-    button.onclick = () => window.show('settings', button);
-    nav.appendChild(button);
+    let button = nav.querySelector('.settings-nav-btn');
+    if (!button) {
+      button = document.createElement('button');
+      button.className = 'settings-nav-btn';
+      button.type = 'button';
+      button.textContent = '⚙ Settings';
+      button.onclick = () => window.show('settings', button);
+      nav.appendChild(button);
+    }
 
-    const section = document.createElement('section');
-    section.id = 'settings';
-    section.style.display = 'none';
+    let section = document.getElementById('settings');
+    if (!section) {
+      section = document.createElement('section');
+      section.id = 'settings';
+      section.style.display = 'none';
+      main.appendChild(section);
+    }
+
+    const selectedOptions = cityOptions.map(([value, label]) => `<option value="${value}">${label}</option>`).join('');
     section.innerHTML = `
       <div class="top"><div><h1>Settings</h1><div class="muted">Personal preferences for how Wonder Label works.</div></div></div>
       <div class="settings-wrap">
         <div class="settings-grid">
           <div class="settings-card">
             <h2>Printing</h2>
-            <p>Choose how hands-on you want the print workflow to be.</p>
-            ${makeToggle('settingPrintConfirmation', true, 'Confirm successful printing', 'After the print dialog closes, ask whether the labels really printed before moving them to Printed.')}
+            <p>Choose how much control you want after sending labels to the printer.</p>
+            ${toggleMarkup('settingPrintConfirmation', true, 'Confirm successful printing', 'After the print dialog closes, ask whether the labels really printed before moving them to Printed.')}
+            <div class="settings-note"><strong>Recommended</strong><span>Keep this on when working with physical label sheets. Turn it off when you prefer a faster hands-off workflow.</span></div>
           </div>
+
           <div class="settings-card">
             <h2>Daily workflow</h2>
-            <p>Small preferences that make routine mailing faster.</p>
-            ${makeToggle('settingRememberLastCity', true, 'Remember last city', 'Use the most recently entered city the next time you add a recipient.')}
-            ${makeToggle('settingKeepPrintedCollapsed', true, 'Keep Printed collapsed', 'Return to Home with the completed history section closed.')}
-            ${makeToggle('settingCompactTables', false, 'Compact tables', 'Use tighter rows so more recipients fit on screen.')}
-            ${makeToggle('settingConfirmDelete', true, 'Confirm before deleting', 'Ask for confirmation before deleting recipients.')}
+            <p>Small conveniences that make repeated mailing work faster and safer.</p>
+            ${toggleMarkup('settingConfirmDelete', true, 'Confirm before deleting', 'Protect against accidentally deleting recipients from either queue.')}
+            ${toggleMarkup('settingRememberLastCity', true, 'Remember last city', 'Reuse the most recently entered city when starting another recipient.')}
+            ${toggleMarkup('settingKeepPrintedCollapsed', true, 'Keep Printed collapsed', 'Keep completed history tucked away when you return to Home.')}
+            ${toggleMarkup('settingCompactTables', false, 'Compact tables', 'Tighten table rows so more recipients fit on screen at once.')}
+            ${toggleMarkup('settingFocusNameOnAdd', true, 'Focus the Name field', 'Put the cursor in the Name field automatically when Add Recipient opens.')}
           </div>
+
           <div class="settings-card">
-            <h2>Default city</h2>
-            <p>Choose the city shown when you start a new recipient.</p>
-            <select id="settingDefaultCity" class="wm-select rtl">
-              <option value="">No default city</option>
-              <option value="בית שמש">בית שמש</option>
-              <option value="ירושלים">ירושלים</option>
-              <option value="ביתר עילית">ביתר עילית</option>
-              <option value="בני ברק">בני ברק</option>
-              <option value="מודיעין עילית">מודיעין עילית</option>
-              <option value="רמת גן">רמת גן</option>
-              <option value="פתח תקווה">פתח תקווה</option>
-              <option value="אשדוד">אשדוד</option>
-              <option value="חיפה">חיפה</option>
-              <option value="נתניה">נתניה</option>
-              <option value="אלעד">אלעד</option>
-              <option value="טבריה">טבריה</option>
-              <option value="צפת">צפת</option>
-              <option value="באר שבע">באר שבע</option>
-            </select>
+            <h2>New recipient</h2>
+            <p>Choose what happens when you start entering a new envelope address.</p>
+            <div class="wl-setting-copy" style="padding-bottom:10px"><span class="wl-setting-name">Default city</span><span class="wl-setting-desc">Pre-fill this city for new recipients. Leave it empty if you do not want a fixed default.</span></div>
+            <select id="settingDefaultCity" class="wm-select rtl" aria-label="Default city">${selectedOptions}</select>
+            <div class="settings-note"><strong>Smart entry</strong><span>Your saved customer-history suggestions and city-based street suggestions continue to work automatically.</span></div>
           </div>
+
           <div class="settings-card">
-            <h2>Smart ideas</h2>
-            <p>Useful preferences we can expand later without cluttering the main screen.</p>
-            <div class="setting-row"><div class="setting-copy"><span class="setting-name">Customer history autocomplete</span><span class="setting-desc">Already active: names from your own saved recipients can fill their address automatically.</span></div><span class="status printed">Active</span></div>
-            <div class="setting-row"><div class="setting-copy"><span class="setting-name">Israeli street suggestions</span><span class="setting-desc">Already active: city-based government street data with manual entry fallback.</span></div><span class="status printed">Active</span></div>
+            <h2>Smart features</h2>
+            <p>These features are already built into Wonder Label and need no setup.</p>
+            <div class="wl-setting-row" style="cursor:default"><span class="wl-setting-copy"><span class="wl-setting-name">Customer history autocomplete</span><span class="wl-setting-desc">Start typing a saved customer's name and reuse the address already in your account.</span></span><span class="settings-status">Active</span></div>
+            <div class="wl-setting-row" style="cursor:default"><span class="wl-setting-copy"><span class="wl-setting-name">Israeli street suggestions</span><span class="wl-setting-desc">Street suggestions follow the selected city, with manual entry available when the data service is unavailable.</span></span><span class="settings-status">Active</span></div>
+            <div class="settings-note"><strong>Next</strong><span>Label calibration, printer defaults, CSV import/export, keyboard shortcuts, and other power-user tools can live here later.</span></div>
           </div>
         </div>
-        <div class="settings-footer"><span><b>Preferences are saved on this browser.</b> We can later move account-level settings into your online profile so they follow you to another computer.</span><button class="settings-reset" type="button" id="resetSettings">Reset preferences</button></div>
+        <div class="settings-footer"><span><b>Preferences are saved on this browser.</b> They currently stay with this browser/device. Later we can move account-level preferences into Supabase so they follow you between computers.</span><button class="settings-reset" type="button" id="resetSettings">Reset preferences</button></div>
       </div>`;
-    main.appendChild(section);
 
-    const settings = readSettings();
-    document.getElementById('settingPrintConfirmation').checked = settings.printConfirmation;
-    document.getElementById('settingConfirmDelete').checked = settings.confirmDelete;
-    document.getElementById('settingKeepPrintedCollapsed').checked = settings.keepPrintedCollapsed;
-    document.getElementById('settingCompactTables').checked = settings.compactTables;
-    document.getElementById('settingRememberLastCity').checked = settings.rememberLastCity;
-    document.getElementById('settingDefaultCity').value = settings.defaultCity || '';
-    setCompact(settings.compactTables);
+    bindSettings();
+  }
 
-    function update(key, value) {
-      const next = writeSettings({ ...readSettings(), [key]: value });
-      setCompact(next.compactTables);
-    }
+  function bindSettings() {
+    const s = readSettings();
+    const controls = {
+      printConfirmation: document.getElementById('settingPrintConfirmation'),
+      confirmDelete: document.getElementById('settingConfirmDelete'),
+      keepPrintedCollapsed: document.getElementById('settingKeepPrintedCollapsed'),
+      compactTables: document.getElementById('settingCompactTables'),
+      rememberLastCity: document.getElementById('settingRememberLastCity'),
+      focusNameOnAdd: document.getElementById('settingFocusNameOnAdd'),
+      defaultCity: document.getElementById('settingDefaultCity')
+    };
 
-    document.getElementById('settingPrintConfirmation').onchange = e => update('printConfirmation', e.target.checked);
-    document.getElementById('settingConfirmDelete').onchange = e => update('confirmDelete', e.target.checked);
-    document.getElementById('settingKeepPrintedCollapsed').onchange = e => update('keepPrintedCollapsed', e.target.checked);
-    document.getElementById('settingCompactTables').onchange = e => update('compactTables', e.target.checked);
-    document.getElementById('settingRememberLastCity').onchange = e => update('rememberLastCity', e.target.checked);
-    document.getElementById('settingDefaultCity').onchange = e => update('defaultCity', e.target.value);
+    controls.printConfirmation.checked = s.printConfirmation;
+    controls.confirmDelete.checked = s.confirmDelete;
+    controls.keepPrintedCollapsed.checked = s.keepPrintedCollapsed;
+    controls.compactTables.checked = s.compactTables;
+    controls.rememberLastCity.checked = s.rememberLastCity;
+    controls.focusNameOnAdd.checked = s.focusNameOnAdd;
+    controls.defaultCity.value = s.defaultCity || '';
+    setCompact(s.compactTables);
+
+    Object.entries(controls).forEach(([key, control]) => {
+      control.addEventListener('change', () => {
+        const next = writeSettings({ ...readSettings(), [key]: control.type === 'checkbox' ? control.checked : control.value });
+        setCompact(next.compactTables);
+      });
+    });
+
     document.getElementById('resetSettings').onclick = () => {
       const next = writeSettings(DEFAULTS);
-      document.getElementById('settingPrintConfirmation').checked = next.printConfirmation;
-      document.getElementById('settingConfirmDelete').checked = next.confirmDelete;
-      document.getElementById('settingKeepPrintedCollapsed').checked = next.keepPrintedCollapsed;
-      document.getElementById('settingCompactTables').checked = next.compactTables;
-      document.getElementById('settingRememberLastCity').checked = next.rememberLastCity;
-      document.getElementById('settingDefaultCity').value = next.defaultCity;
+      controls.printConfirmation.checked = next.printConfirmation;
+      controls.confirmDelete.checked = next.confirmDelete;
+      controls.keepPrintedCollapsed.checked = next.keepPrintedCollapsed;
+      controls.compactTables.checked = next.compactTables;
+      controls.rememberLastCity.checked = next.rememberLastCity;
+      controls.focusNameOnAdd.checked = next.focusNameOnAdd;
+      controls.defaultCity.value = next.defaultCity;
       setCompact(next.compactTables);
     };
   }
@@ -221,10 +250,12 @@
         originalStartNew();
         const s = readSettings();
         const city = s.rememberLastCity && s.lastCity ? s.lastCity : s.defaultCity;
-        if (city && document.getElementById('city')) {
-          document.getElementById('city').value = city;
+        const cityInput = document.getElementById('city');
+        if (city && cityInput) {
+          cityInput.value = city;
           if (typeof window.loadStreetsForCity === 'function') window.loadStreetsForCity(city).catch(() => {});
         }
+        if (s.focusNameOnAdd) setTimeout(() => document.getElementById('name')?.focus(), 0);
       };
     }
 
@@ -246,7 +277,7 @@
         const s = readSettings();
         if (id === 'home' && s.keepPrintedCollapsed) document.getElementById('printedPanel')?.classList.remove('open');
         if (id === 'settings') {
-          ensureSettingsUi();
+          renderSettingsSection();
           document.querySelectorAll('.nav button').forEach(x => x.classList.remove('active'));
           document.querySelector('.settings-nav-btn')?.classList.add('active');
         }
@@ -256,8 +287,7 @@
     const originalDelete = window.deleteSectionSelected;
     if (typeof originalDelete === 'function') {
       window.deleteSectionSelected = function (section) {
-        const s = readSettings();
-        if (s.confirmDelete) return originalDelete(section);
+        if (readSettings().confirmDelete) return originalDelete(section);
         const selectedIds = typeof window.ids === 'function' ? window.ids(section) : [];
         if (!selectedIds.length) return alert('Select recipients first.');
         if (typeof window.runBulk === 'function') return window.runBulk(section, 'DELETE', null, n => `${n} recipient${n === 1 ? '' : 's'} deleted.`);
@@ -265,18 +295,19 @@
       };
     }
 
-    const city = document.getElementById('city');
-    if (city) {
-      city.addEventListener('change', () => {
+    const cityInput = document.getElementById('city');
+    if (cityInput) {
+      cityInput.addEventListener('change', () => {
         const s = readSettings();
-        if (s.rememberLastCity) writeSettings({ ...s, lastCity: city.value.trim() });
+        if (s.rememberLastCity) writeSettings({ ...s, lastCity: cityInput.value.trim() });
       });
     }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
     injectStyles();
-    ensureSettingsUi();
+    renderSettingsSection();
+    setCompact(readSettings().compactTables);
     installBehaviorHooks();
   });
 })();
