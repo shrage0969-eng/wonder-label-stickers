@@ -232,8 +232,7 @@
     if (typeof originalDoPrint === 'function') {
       window.doPrint = function () {
         if (readSettings().printConfirmation) return originalDoPrint();
-        if (!Array.isArray(window.__wonderLabelPendingPrint)) return originalDoPrint();
-        window.print();
+        originalDoPrint();
         setTimeout(() => {
           if (typeof window.confirmPrinted === 'function') window.confirmPrinted();
         }, 50);
